@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
 
-function SearchAndFilter() {
+function SearchAndFilter({ onSearch }) {
 
     const [input, setInput] = useState(" ");
+
+    const handleChange = (e) => {
+        setInput(e.target.value);
+    }
+
+    const handleSearch = () => {
+        onSearch(input);
+    }
 
     return (
         <section className='flex justify-between items-centre py-5 px-0'>
             <form>
-                <input className='placeholder: text-slate-300 bg-slate-700 text-white py-2 px-8 rounded outline-none border-none text-white my-3 mx-9' type='text' name='search' id='search' value={input} onChange={(e) => setInput(e.target.value)} placeholder='Search for a country...' />
+                <input className='placeholder: text-slate-300 bg-slate-700 text-white py-2 px-8 rounded outline-none border-none text-white my-3 mx-9' type='text' name='search' id='search' value={input} onChange={handleChange} onClick={handleSearch} placeholder='Search for a country...' />
             </form>
 
             <div>                
