@@ -20,42 +20,45 @@ const CountryDetail = () => {
     return (
         <>
             <Header />
-            <section className='p-12'>
-                <Link className='flex justify-between items-center px-2 mb-7 bg-slate-700 w-20 rounded-full' to="/"><BsFillArrowLeftCircleFill />Back</Link>
+            <section className='p-20'>
                 {country.map((c) => {
                     const { idd, flags, name, region, subregion, population, capital, borders } = c;
 
-                    return <article className='flex items-center' key={idd}>
+                    return <article className='grid grid-cols-2 place-items-center' key={idd}>
+                        <img className='rounded md:h-72 w-full object-cover' src={flags.svg} alt={name} />
+
                         <div>
-                            <img src={flags.svg} alt={name} />
-                        </div>
-                        <div className='m-7'>
                             <div>
                                 <h2 className='font-semibold text-xl tracking-wide'>{name.common}</h2>
                             </div>
-                            <div className='my-2.5'>
+                            <div className='my-2.5 inline-block'>
 
                                 <h5 className='font-semibold'>Population: <span className='font-light'>{population.toLocaleString()}</span></h5>
                                 <h5 className='font-semibold'>Native Name: <span className='font-light'>{name.official}</span></h5>
                                 <h5 className='font-semibold'>Region: <span className='font-light'>{region}</span></h5>
                                 <h5 className='font-semibold'>Sub-Region: <span className='font-light'>{subregion}</span></h5>
                                 <h5 className='font-semibold'>Capital: <span className='font-light'>{capital}</span></h5>
-                                <div className='flex'>
-                                <h5 className='font-semibold inline-block'>Border Countries: </h5>
-                                <div className='flex'>
-                                {borders.map((b) => {
-                                    return (
-                                        <ul className='m-2.5 py-1 px-5 bg-slate-700 rounded-lg flex flex-wrap' key={b}>
-                                            <li>{b}</li>
-                                        </ul>
-                                    )
-                                })}
-                                </div>
-                                </div>
+
+                                {c.borders && (
+                                    <>
+                                        <div className='mt-3'>
+                                            <h5 className='font-semibold tracking-wide'>Borders: </h5>
+                                            <ul className='flex flex-wrap items-center justify-center gap-2'>
+                                                {borders.map((b) => (
+                                                    <li key={b} className='py-1 px-4 bg-slate-700 rounded-lg'>
+                                                        {b}
+                                                    </li>
+
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    </>
+                                )}
 
 
 
                             </div>
+                            <Link className='flex justify-between items-center px-2 mb-7 bg-slate-700 w-20 rounded-full' to="/"><BsFillArrowLeftCircleFill />Back</Link>
 
 
                         </div>
